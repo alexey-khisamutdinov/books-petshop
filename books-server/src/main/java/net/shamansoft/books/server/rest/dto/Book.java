@@ -1,5 +1,7 @@
 package net.shamansoft.books.server.rest.dto;
 
+import java.util.Optional;
+
 public class Book {
 
     public Book(){};
@@ -7,12 +9,12 @@ public class Book {
     private String name;
     private String author;
     private String publisher;
-    int year;
+    Integer year;
 
-    public Book(String name, String author, String publisher, int year) {
-        this.name = name;
-        this.author = author;
-        this.publisher = publisher;
+    public Book(String name, String author, String publisher, Integer year) {
+        this.name = Optional.ofNullable(name).orElse("");
+        this.author = Optional.ofNullable(author).orElse("");
+        this.publisher = Optional.ofNullable(publisher).orElse("");
         this.year = year;
     }
 
@@ -38,5 +40,10 @@ public class Book {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public boolean matchesQuery(String query) {
+        String lcQuery = query.toLowerCase();
+        return name.toLowerCase().contains(lcQuery) || author.toLowerCase().contains(lcQuery) || publisher.toLowerCase().contains(lcQuery);
     }
 }
