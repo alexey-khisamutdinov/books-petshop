@@ -35,8 +35,16 @@ public class ReadingListApplication implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		System.out.println(helloService.sayHello(args.getOptionValues("name")));
-		List<Book> bookList = booksClient.findAll();
-		bookList.forEach(book -> log.info(book.toString()));
+		List<String> query = args.getOptionValues("query");
+		if(query != null){
+			List<Book> bookList = booksClient.find(query);
+			if (bookList.isEmpty()) {
+				System.out.println(String.format("No books with the search query '%s' are found", query));
+			} else {
+				System.out.println("Look what I've found:");
+				bookList.forEach(book -> System.out.println((book.toString())));
+			}
+		}
 		Console console = System.console();
 		if (console == null) {
 			System.out.println("No console: non-interactive mode!");
