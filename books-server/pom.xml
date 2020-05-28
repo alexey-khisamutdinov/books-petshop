@@ -121,7 +121,7 @@
     <repository>
       <id>github</id>
       <name>NoticeBoard Simple CRUD application</name>
-      <url>https://maven.pkg.github.com/alexey-khisamutdinov/books-petshop/books-server/</url>
+      <url>https://maven.pkg.github.com/alexey-khisamutdinov/books-petshop/</url>
     </repository>
   </distributionManagement>
 </project>
